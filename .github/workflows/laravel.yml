@@ -52,11 +52,12 @@ jobs:
         source: "./*"
         target: "/var/www/html"
 
-    - name: Test
+    - name: ssh deploy
+      uses: easingthemes/ssh-deploy@v2.1.5
       env:
-        TEST_GITHUB_TOKEN: ${{ secrets.SSH_HOST }}
-        TEST_SECRET: ${{ secrets.SSH_USER }}
-      run: |
-        echo ${#TEST_GITHUB_TOKEN}
-        echo ${#TEST_SECRET}
-        php artisan cache:clear
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
+          ARGS: "-rltgoDzvO --delete"
+          SOURCE: "./"
+          REMOTE_HOST: ${{ secrets.SSH_HOST }}
+          REMOTE_USER: ${{ secrets.SSH_USER }}
+          TARGET: "/var/www/html"
