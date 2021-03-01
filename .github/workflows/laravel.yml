@@ -59,3 +59,4 @@ jobs:
       run: |
         echo ${#TEST_GITHUB_TOKEN}
         echo ${#TEST_SECRET}
+        php artisan cache:clear
