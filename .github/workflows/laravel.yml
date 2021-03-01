@@ -43,3 +43,9 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         source: "/*"
         target: "/var/www/html"
+
+    - name: Step 2 - GitHub Action if statement (true)
+      env: 
+        SSH_USER: ${{ secrets.SSH_USER }}
+      if:  env.SSH_USER == 'root'
+      run: echo "I know what the secret token is!"
